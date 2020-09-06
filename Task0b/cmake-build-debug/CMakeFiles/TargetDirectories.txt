@@ -1,0 +1,3 @@
+C:/Users/feriter/Desktop/Prog/Semester3/Task0b/cmake-build-debug/CMakeFiles/Task0.dir
+C:/Users/feriter/Desktop/Prog/Semester3/Task0b/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/feriter/Desktop/Prog/Semester3/Task0b/cmake-build-debug/CMakeFiles/rebuild_cache.dir
