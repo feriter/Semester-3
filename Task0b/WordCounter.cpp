@@ -1,4 +1,5 @@
 #include "WordCounter.h"
+#include <stdlib.h>
 
 namespace CSV {
     bool CompareFunc(const std::pair <std::string, int> p1, const std::pair <std::string, int> p2) {
@@ -13,6 +14,10 @@ namespace CSV {
 
     void WordCounter::CountWords(std::string fileName) {
         std::ifstream fin(fileName);
+        if (!fin) {
+            cout << "Unable to read from file";
+            exit(0);
+        }
         char bufferChar;
         std::string bufferString;
         while ((bufferChar = fin.get()) != EOF) {
@@ -20,9 +25,6 @@ namespace CSV {
                 bufferString += bufferChar;
             } else if (!bufferString.empty()) {
                 this->wordsCount[bufferString]++;
-                if (this->wordsCount[bufferString] == 1) {
-                    this->wordVariety++;
-                }
                 this->maxWordLength = std::max(this->maxWordLength, bufferString.length());
                 bufferString = "";
                 this->wordCount++;
@@ -30,9 +32,6 @@ namespace CSV {
         }
         if (!bufferString.empty()) {
             this->wordsCount[bufferString]++;
-            if (this->wordsCount[bufferString] == 1) {
-                this->wordVariety++;
-            }
             this->maxWordLength = std::max(this->maxWordLength, bufferString.length());
         }
         fin.close();
@@ -40,6 +39,10 @@ namespace CSV {
 
     void WordCounter::MakeCSVFile(std::string fileName) {
         std::ofstream fout(fileName);
+        if (!fout) {
+            cout << "Unable to write in file";
+            exit(0);
+        }
         std::list <std::pair <std::string, int> > sortedByNumberMap;
         for (const auto& it : this->wordsCount) {
             sortedByNumberMap.insert(sortedByNumberMap.begin(), it);
