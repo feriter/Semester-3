@@ -12,8 +12,8 @@ namespace CSV {
         unsigned int maxWordLength;
 
     public:
-        void CountWords(std::string filePath);
-        void MakeCSVFile(std::string filePath);
+        void CountWords(std::string & filePath);
+        void MakeCSVFile(std::string & filePath);
         WordCounter() { maxWordLength = 0; wordCount = 0; }
         ~WordCounter() = default;
     };

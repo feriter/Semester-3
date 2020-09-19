@@ -1,8 +1,7 @@
 #include "WordCounter.h"
-#include <stdlib.h>
 
 namespace CSV {
-    bool CompareFunc(const std::pair <std::string, int> p1, const std::pair <std::string, int> p2) {
+    bool CompareFunc(const std::pair <std::string, int> & p1, const std::pair <std::string, int> & p2) {
         return (p1.second > p2.second);
     }
 
@@ -12,11 +11,10 @@ namespace CSV {
                 (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
     }
 
-    void WordCounter::CountWords(std::string fileName) {
-        std::ifstream fin(fileName);
+    void WordCounter::CountWords(std::string & filePath) {
+        std::ifstream fin(filePath);
         if (!fin) {
-            cout << "Unable to read from file";
-            exit(0);
+            throw std::exception("Unable to read from file");
         }
         char bufferChar;
         std::string bufferString;
@@ -37,18 +35,17 @@ namespace CSV {
         fin.close();
     }
 
-    void WordCounter::MakeCSVFile(std::string fileName) {
-        std::ofstream fout(fileName);
+    void WordCounter::MakeCSVFile(std::string & filePath) {
+        std::ofstream fout(filePath);
         if (!fout) {
-            cout << "Unable to write in file";
-            exit(0);
+            throw std::exception("Unable to write in file");
         }
         std::list <std::pair <std::string, int> > sortedByNumberMap;
         for (const auto& it : this->wordsCount) {
             sortedByNumberMap.insert(sortedByNumberMap.begin(), it);
         }
         sortedByNumberMap.sort(CompareFunc);
-        // Everything below is just for pretty view of csv
+        // Everything below is just for pretty view of file
         fout << "Word";
         for (int i = 0; i < this->maxWordLength + 2; ++i) {
             fout << " ";
