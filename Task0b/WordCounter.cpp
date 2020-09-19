@@ -11,7 +11,7 @@ namespace CSV {
                 (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
     }
 
-    void WordCounter::CountWords(std::string & filePath) {
+    void WordCounter::CountWords(std::string filePath) {
         std::ifstream fin(filePath);
         if (!fin) {
             throw std::exception("Unable to read from file");
@@ -35,7 +35,7 @@ namespace CSV {
         fin.close();
     }
 
-    void WordCounter::MakeCSVFile(std::string & filePath) {
+    void WordCounter::MakeCSVFile(std::string filePath) {
         std::ofstream fout(filePath);
         if (!fout) {
             throw std::exception("Unable to write in file");
